@@ -580,3 +580,6 @@ FodyWeavers.xsd
 
 # cmake again
 cmake-build-debug/
+
+# visual studio
+out/
