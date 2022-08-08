@@ -1,7 +1,6 @@
-﻿cmake_minimum_required (VERSION 3.22)
+cmake_minimum_required (VERSION 3.23)
 
 project ("cppcodes")
 
-set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory ("cppcodes")

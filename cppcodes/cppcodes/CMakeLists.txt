@@ -1,18 +1,13 @@
-﻿cmake_minimum_required (VERSION 3.22)
+cmake_minimum_required (VERSION 3.23)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
-find_path(UWEBSOCKETS_INCLUDE_DIRS "uwebsockets/App.h")
-find_package(fmt CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
-
 
 add_executable (cppcodes "cppcodes.cpp" "cppcodes.h" "strings.ixx")
 
-target_include_directories(cppcodes PRIVATE ${UWEBSOCKETS_INCLUDE_DIRS})
-target_link_libraries(cppcodes PRIVATE fmt::fmt)
-target_link_libraries(cppcodes PRIVATE imgui::imgui)
+target_link_options(cppcodes PRIVATE $<$<CONFIG:Debug>:/INCREMENTAL>)
+target_compile_options(cppcodes PRIVATE $<$<CONFIG:Debug>:/ZI>)
 
 
-
-set_property(TARGET cppcodes PROPERTY CXX_STANDARD 20)
+target_link_libraries(cppcodes PRIVATE imgui::imgui d3d11.lib)

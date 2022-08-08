@@ -1,7 +1,7 @@
-ï»¿#include <iostream>
+#include <iostream>
 
 export module Dfsdfs;
 
 export void MyFunc() {
-	std::cout << "ä¸­æ–‡aaa\n";
+	std::cout << "ÖÐÎÄssffsdfÈöµ©·¢Éú\n";
 }

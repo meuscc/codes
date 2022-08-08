@@ -98,7 +98,7 @@ int main(int, char**)
             static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("芳芳自游 能写中文不!---------");                          // Create a window called "Hello, world!" and append into it.
+            ImGui::Begin("芳芳自游 能写中文不34444!---------");                          // Create a window called "Hello, world!" and append into it.
 
             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
