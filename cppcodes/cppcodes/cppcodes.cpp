@@ -68,7 +68,7 @@ int main(int, char**)
             static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("芳芳自游版本1sdfs是否是否是");
+            ImGui::Begin("芳芳自游v1.0");
 
             ImGui::Text("This is some useful text.");
 
