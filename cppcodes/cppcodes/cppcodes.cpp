@@ -5,6 +5,8 @@ import Dfsdfs;
 #include <imgui_impl_opengl3.h>
 #include <stdio.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
+#include <Windows.h>
 
 
 static void glfw_error_callback(int error, const char* description)
@@ -14,7 +16,9 @@ static void glfw_error_callback(int error, const char* description)
 
 int main(int, char**)
 {
+    SetConsoleOutputCP(65001);
     MyFunc();
+    std::cout << "芳芳自游\n";
     // 1. Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -64,7 +68,7 @@ int main(int, char**)
             static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("芳芳自游版本1");
+            ImGui::Begin("芳芳自游版本1sdfs是否是否是");
 
             ImGui::Text("This is some useful text.");
 
