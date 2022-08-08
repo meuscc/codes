@@ -583,3 +583,5 @@ cmake-build-debug/
 
 # visual studio
 out/
+
+enc_temp_folder/
