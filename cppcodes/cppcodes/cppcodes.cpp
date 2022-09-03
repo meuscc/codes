@@ -1,4 +1,4 @@
-import Dfsdfs;
+//import Dfsdfs;
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -6,7 +6,7 @@ import Dfsdfs;
 #include <stdio.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <Windows.h>
+//#include <Windows.h>
 
 
 static void glfw_error_callback(int error, const char* description)
@@ -16,19 +16,36 @@ static void glfw_error_callback(int error, const char* description)
 
 int main(int, char**)
 {
-    SetConsoleOutputCP(65001);
-    MyFunc();
+//    SetConsoleOutputCP(65001);
+//    MyFunc();
     std::cout << "芳芳自游\n";
     // 1. Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;
 
-    // 2. GL+GLSL
+    // Decide GL+GLSL versions
+#if defined(IMGUI_IMPL_OPENGL_ES2)
+    // GL ES 2.0 + GLSL 100
+    const char* glsl_version = "#version 100";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+#elif defined(__APPLE__)
+    // GL 3.2 + GLSL 150
+    const char* glsl_version = "#version 150";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
+#else
+    // GL 3.0 + GLSL 130
     const char* glsl_version = "#version 130";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
+    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
+#endif
 
     // 3. Create window with graphics context
     GLFWwindow* window = glfwCreateWindow(1280, 720, "芳芳自游", NULL, NULL);
@@ -50,7 +67,7 @@ int main(int, char**)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // 6. Fonts
-    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+    ImFont* font = io.Fonts->AddFontFromFileTTF("/Users/shihaiyang/Downloads/MSYH.TTC", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
 
     // Our state
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
