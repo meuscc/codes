@@ -110,7 +110,7 @@ int main(int, char **) {
             static int counter = 0;
 
             ImGui::Begin(
-                    "说实话 这个c++ 速度费基尔快 真的");                          // Create a window called "Hello, world!" and append into it.
+                    "apple 的c++ 编译速度 不说了 杠杆的");                          // Create a window called "Hello, world!" and append into it.
 
             ImGui::Text(
                     "This is some useful text.");               // Display some text (you can use a format strings too)
