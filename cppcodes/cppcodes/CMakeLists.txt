@@ -8,12 +8,17 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 23)
 
+find_path(UWEBSOCKETS_INCLUDE_DIRS "uwebsockets/App.h")
+find_path(CPP_HTTPLIB_INCLUDE_DIRS "httplib.h")
+
+find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
-add_executable(cppcodes "cppcodes.cpp" "cppcodes.h" "strings.cpp")
+
+add_executable(cppcodes "cppcodes.cpp" "cppcodes.h" "strings.cpp" http.hpp ui.h)
 
 # visual studio 热更新
 if (WIN32 OR MSVC OR MSYS OR MINGW)
@@ -21,8 +26,11 @@ if (WIN32 OR MSVC OR MSYS OR MINGW)
     target_compile_options(cppcodes PRIVATE $<$<CONFIG:Debug>:/ZI>)
 endif ()
 
+target_include_directories(cppcodes PRIVATE ${UWEBSOCKETS_INCLUDE_DIRS})
+target_include_directories(cppcodes PRIVATE ${CPP_HTTPLIB_INCLUDE_DIRS})
+
+target_link_libraries(cppcodes PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(cppcodes PRIVATE imgui::imgui)
 target_link_libraries(cppcodes PRIVATE glfw)
 target_link_libraries(cppcodes PRIVATE ${OPENGL_LIBRARY})
-
 target_link_libraries(cppcodes PRIVATE SDL2::SDL2 SDL2::SDL2main)
