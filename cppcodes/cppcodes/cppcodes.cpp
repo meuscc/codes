@@ -1,7 +1,7 @@
 #include "cppcodes.h"
-#include "http.hpp"
+#include "ui.hpp"
 
-int main() {
+int main(int, char**) {
     run();
     return 0;
 }

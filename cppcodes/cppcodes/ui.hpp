@@ -15,10 +15,10 @@
 #include "cppcodes.h"
 
 // Main code
-int run(int, char **) {
+int run() {
     // Display and UTF8 Settings
-    // SetProcessDPIAware();
-    // SetConsoleOutputCP(65001);
+    SetProcessDPIAware();
+    SetConsoleOutputCP(65001);
 
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
@@ -36,7 +36,7 @@ int run(int, char **) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 #elif defined(__APPLE__)
     // GL 3.2 Core + GLSL 150
-    const char *glsl_version = "#version 150";
+    const char* glsl_version = "#version 150";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG); // Always required on Mac
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -54,10 +54,10 @@ int run(int, char **) {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-    auto window_flags = (SDL_WindowFlags) (SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
-                                           SDL_WINDOW_ALLOW_HIGHDPI);
-    SDL_Window *window = SDL_CreateWindow("自游", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720,
-                                          window_flags);
+    auto window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
+        SDL_WINDOW_ALLOW_HIGHDPI);
+    SDL_Window* window = SDL_CreateWindow("自游", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720,
+        window_flags);
     SDL_GLContext gl_context = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, gl_context);
     // Enable vsync
@@ -66,8 +66,8 @@ int run(int, char **) {
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
-    (void) io;
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
@@ -80,13 +80,13 @@ int run(int, char **) {
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Load ImGui Fonts assets
-    // ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
-    ImFont *font = io.Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 32.0f, nullptr,
-                                                io.Fonts->GetGlyphRangesChineseFull());
+    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+    //ImFont *font = io.Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 32.0f, nullptr,
+    io.Fonts->GetGlyphRangesChineseFull();
     IM_ASSERT(font != nullptr);
 
     // Set font scale in osx
-    io.FontGlobalScale = 0.5f;
+    //io.FontGlobalScale = 0.5f;
 
     // Main loop
     bool done = false;
@@ -114,21 +114,33 @@ int run(int, char **) {
         {
             static float f = 0.0f;
             static int counter = 0;
-            ImGui::SetNextWindowPos(ImVec2{0, 0});
-            ImGui::Begin("你好世界 饮水思源的紫图", &opened,
-                         ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize |
-                         ImGuiWindowFlags_NoCollapse);
+            ImGui::SetNextWindowPos(ImVec2{ 0, 0 });
+            ImGui::SetNextWindowSize(ImVec2{ 240, 400 });
+            ImGui::Begin("23223223233你好世界 饮水思源的紫图sdfs", &opened,
+                ImGuiWindowFlags_NoMove |
+                ImGuiWindowFlags_NoCollapse);
 
             ImGui::Text("胜多负少反反复复");
+
+            ImGui::BeginChild("TopBar", ImVec2(0, 100), false, 0); // Use avail width, use 100 for height
+            ImGui::Text("Header");
+            ImGui::EndChild();
+
+
+
+            ImGui::BeginChild("BottomBar", ImVec2(0, 0), false, 0); // Use avail width/height
+            ImGui::Text("Footer");
+            ImGui::EndChild();
+
 
             ImGui::End();
         }
 
         // Rendering
         ImGui::Render();
-        glViewport(0, 0, (int) io.DisplaySize.x, (int) io.DisplaySize.y);
+        glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
         glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
-                     clear_color.w);
+            clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
