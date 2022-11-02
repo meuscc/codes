@@ -17,8 +17,8 @@
 // Main code
 int run() {
     // Display and UTF8 Settings
-    SetProcessDPIAware();
-    SetConsoleOutputCP(65001);
+    // SetProcessDPIAware();
+    // etConsoleOutputCP(65001);
 
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
@@ -80,13 +80,13 @@ int run() {
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Load ImGui Fonts assets
-    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
-    //ImFont *font = io.Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 32.0f, nullptr,
+    // ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+    ImFont *font = io.Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 32.0f, nullptr, io.Fonts->GetGlyphRangesChineseFull());
     io.Fonts->GetGlyphRangesChineseFull();
     IM_ASSERT(font != nullptr);
 
     // Set font scale in osx
-    //io.FontGlobalScale = 0.5f;
+    io.FontGlobalScale = 0.5f;
 
     // Main loop
     bool done = false;
