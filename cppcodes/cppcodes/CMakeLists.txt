@@ -18,7 +18,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 
-add_executable(cppcodes "cppcodes.cpp" "cppcodes.h" "strings.cpp" "http.hpp" "ui.hpp")
+add_executable(cppcodes "cppcodes.cpp" "cppcodes.h" "strings.ixx" "http.hpp" "ui.hpp")
 
 # visual studio 热更新
 if (WIN32 OR MSVC OR MSYS OR MINGW)
